@@ -26,7 +26,7 @@
   - All the usual except we added a global request mapping, to avoid repeating the mapping prefix all over the place.
   - All the mappings under this controller will start with `/students`.
   - The Service class is [`@Autowired`](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/src/main/java/com/csc340/jpademo/student/StudentController.java#L15). Do not use a constructor, this will not work.
-    - In the Service class,the Repository class is also [`@Autowired`](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/src/main/java/com/csc340/jpademo/student/StudentService.java#L10)  :).
+    - In the Service class,the Repository class is also [`@Autowired`](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/src/main/java/com/csc340/jpademo/student/StudentService.java#L10)  :)
 - Views
   - For any form that sends POST requests with the form body, the input attribute "name" should match the data field. E.g for the student major [`<input type="text" id="major" name="major" placeholder="Major"/>`](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/src/main/resources/templates/student-list.html#L33) we use `name="major"` to use the setters to match that field. If you do not include the input name attribute, a null will be insterted for that field.
   - Remember that any view must have a correspoding mapping.
@@ -48,4 +48,5 @@
           }
          }
         ```
+  - You can also create subfolders in the templates forlder. For example if you wanted views for the student to be in one folder you can create a students subfolder and put all the student views in there. Then your Controller would have to `return "students/students-list";`
     
