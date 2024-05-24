@@ -1,7 +1,7 @@
 # su24-jpa-demo
 ## CRUD MVC App using JPA/Hibernate, MySQL, and ThymeLeaf.
 ## Things to note:
-- [Dependencies](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/pom.xml#L19) to JPA and MySQL.
+- [Dependencies](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/pom.xml#L19) to JPA and MySQL, in addition to the usual. JPA handles the persistence, MySQL is the database to be used.
 - [`/src/main/resources/application.properties`](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/src/main/resources/application.properties) file  is the configuration for the MySQL database.
   - the database name is between the last `/` and the `?`. In this case the database name is `340-test`.
   - You must have the database up and running before running the project!
