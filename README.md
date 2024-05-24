@@ -25,9 +25,16 @@
 - [Controller](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/src/main/java/com/csc340/jpademo/student/StudentController.java)
   - All the usual except we added a global request mapping, to avoid repeating the mapping prefix all over the place.
   - All the mappings under this controller will start with `/students`.
+  - Return view names.
+  - Return `"redirect:/link/to/redirect"` - if there is not necessarily a view attached to an action. e.g. going back to list after deleting one item.
+  - Model attribute names and objects using `model.addAttribute("studentList", service.getAllStudents());`
+  - All views live in `src/main/resources/templates`.
   - The Service class is [`@Autowired`](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/src/main/java/com/csc340/jpademo/student/StudentController.java#L15). Do not use a constructor, this will not work.
     - In the Service class,the Repository class is also [`@Autowired`](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/src/main/java/com/csc340/jpademo/student/StudentService.java#L10)  :)
 - Views
+  - data-th-each="student : ${studentList}"` => "For each student in studentList"
+  - <p data-th-text="${student.id}"></p>` => "The text content for this this paragraph element should be whatever the student id is".
+  - <a data-th-href="@{/students/{id} (id=${student.id})}" data-th-text="${student.id}"></a>` => Make a link that includes a variable in the path. Here the variabe `id` is the student id. The text shown by the link is also the student id (otherwise it will be bank and you cannot click on anything).We are using the @ notation because we need access to the objects. Other links that do not include data from the model can be made the regular HTML way.
   - For any form that sends POST requests with the form body, the input attribute "name" should match the data field. E.g for the student major [`<input type="text" id="major" name="major" placeholder="Major"/>`](https://github.com/uncg-csc340/su24-jpa-demo/blob/11cd883de7e1acbbc1de2430d368f8934085efac/src/main/resources/templates/student-list.html#L33) we use `name="major"` to use the setters to match that field. If you do not include the input name attribute, a null will be insterted for that field.
   - Remember that any view must have a correspoding mapping.
     - If you wanted to have a page that is a standalone form, you must make a mapping in the controller that returns the form page as a view.
@@ -48,5 +55,5 @@
           }
          }
         ```
-  - You can also create subfolders in the templates forlder. For example if you wanted views for the student to be in one folder you can create a students subfolder and put all the student views in there. Then your Controller would have to `return "students/students-list";`
-    
+  - You can also create subfolders in the templates forlder. For example if you wanted views for the student to be in one folder you can create a students subfolder and put all the student views in there. Then your Controller would have to `return "students/students-list";
+- Run the app in IntelliJ, then on the browser go to: http://localhost:8080/students/all
