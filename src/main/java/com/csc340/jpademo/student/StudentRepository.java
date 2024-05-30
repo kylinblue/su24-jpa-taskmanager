@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
-    @Query(value = "select s from students s where gpa > ?1", nativeQuery = true)
+    @Query(value = "select  s from students s where gpa > ?1", nativeQuery = true)
     public List<Student> getHonorsStudents(double gpa);
 }

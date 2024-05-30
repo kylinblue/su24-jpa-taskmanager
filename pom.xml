@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.csc340</groupId>
-	<artifactId>jpa-demo</artifactId>
+	<artifactId>jpa-taskmanager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jpa-demo</name>
 	<description>Demo project for Spring Boot</description>
