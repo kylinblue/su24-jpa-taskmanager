@@ -13,40 +13,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class TaskController {
     @Autowired TaskService taskService;
+    @Autowired GoalService goalService;
 
-    @GetMapping("/all")
+    /*@GetMapping("/all")
     public String getAllTasks(Model model) {
         model.addAttribute("taskList", taskService.getAllTasks());
         return "task-list";
-    }
+    }*/
 
     @GetMapping("/{goalId}")
     public String getTaskByGoalId(@PathVariable int goalId, Model model) {
-        model.addAttribute("task", taskService.getTaskByGoalId(goalId));
-        return "task-by-goalid";
+        model.addAttribute("goal", goalService.getGoalByGoalId(goalId));
+        model.addAttribute("taskList", taskService.getTaskByGoalId(goalId));
+        return "goal-detail";
     }
 
-    @PostMapping("/create")
+    @GetMapping("/taskid/{taskId}")
+    public String getTaskByTaskId(@PathVariable int taskId, Model model) {
+        model.addAttribute("task", taskService.getTaskByTaskId(taskId));
+        return "task-detail";
+    }
+
+    @PostMapping("/write")
     public String addNewTask(Task task) {
         taskService.createTask(task);
-        return "redirect:/taskmanager/tasks/all";
+        int goalId = task.getGoalId();
+        return "redirect:/taskmanager/goals/goalid/" + goalId;
     }
 
-    @PostMapping("/update")
-    public String updateTask(Task task) {
-        taskService.updateTask(task.getTaskId(), task);
-        return "redirect:/taskmanager/tasks/all";
-    }
-
-    @GetMapping("/update/{taskId}")
-    public String updateTaskForm(@PathVariable int taskId, Model model) {
-        model.addAttribute("task", taskService.getTaskByTaskId(taskId));
-        return "task-update";
-    }
-
-    @GetMapping("/delete/taskId")
+    @GetMapping("/delete/{taskId}")
     public String deleteTaskById(@PathVariable int taskId) {
         taskService.deleteTaskById(taskId);
-        return "redirect:/taskmanager/tasks/all";
+        return "redirect:/taskmanager/goals/lookup";
     }
 }

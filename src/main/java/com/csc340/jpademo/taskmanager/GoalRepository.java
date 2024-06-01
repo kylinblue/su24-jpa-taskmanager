@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface GoalRepository
         extends JpaRepository<Goal, Integer>  {
-    @Query(value = "select g from Goal g where g.getUserId = ?1", nativeQuery = true)
+    @Query(value = "select * from Goal where user_id = ?1", nativeQuery = true)
     List<Goal> findByUserId(int userId);
 }

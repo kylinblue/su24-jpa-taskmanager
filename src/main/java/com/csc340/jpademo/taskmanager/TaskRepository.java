@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TaskRepository
         extends JpaRepository<Task, Integer> {
-    @Query(value = "select t from Task t where t.getGoalId =?1", nativeQuery = true)
-    List<Task> findByGoalId(int goalId);
+    @Query(value = "select * from Task where goal_id =?1", nativeQuery = true)
+    List<Task> queryByGoalId(int goalId);
 }

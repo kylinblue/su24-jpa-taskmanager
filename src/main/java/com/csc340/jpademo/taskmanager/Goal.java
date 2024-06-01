@@ -6,8 +6,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "goals")
-
+@Table(name = "goal")
 public class Goal {
 
     @Id
@@ -88,7 +87,7 @@ public class Goal {
         this.status = status;
     }
 
-    public void replaceGoal(Goal newGoal) {
+    /*public void replaceGoal(Goal newGoal) {
         if(newGoal.getUserId() != 0){
             this.userId = newGoal.getUserId();
         }
@@ -104,5 +103,5 @@ public class Goal {
         if(!newGoal.getStatus().isEmpty()){
             this.status = newGoal.getStatus();
         }
-    }
+    }*/
 }

@@ -15,29 +15,36 @@ import java.text.SimpleDateFormat;
 
 public class GoalController {
     @Autowired GoalService goalService;
+    @Autowired TaskService taskService;
 
-    @GetMapping("/all")
-    public String getAllGoals(Model model) {
-        model.addAttribute("goalList", goalService.getAllGoals());
-        return "goal-list";
+    @GetMapping("/creator")
+    public String creatorMapping(){
+        return "goal-creator";
     }
 
-    @GetMapping("/{userId}")
-    public String getGoalByUserId(@PathVariable int userId, Model model) {
-        model.addAttribute("goal", goalService.getGoalByUserId(userId));
+    @GetMapping("/lookup")
+    public String getAllGoals(Model model) {
+        model.addAttribute("goalList", goalService.getAllGoals());
         return "goal-by-userid";
     }
 
-    @PostMapping("/create")
-    public String addNewGoal(Goal goal) {
-        goalService.createGoal(goal);
-        return "redirect:/taskmanager/goals/all";
+    @PostMapping("/userid")
+    public String getGoalByUserId(@RequestParam int userId, Model model) {
+        model.addAttribute("goalList", goalService.getGoalByUserId(userId));
+        return "goal-by-userid-result";
     }
 
-    @PostMapping("/update")
-    public String updateGoal(Goal goal) {
-        goalService.updateGoal(goal.getGoalId(), goal);
-        return "redirect:/taskmanager/goals/all";
+    @GetMapping("/goalid/{goalId}")
+    public String getGoalByGoalId(@PathVariable int goalId, Model model) {
+        model.addAttribute("goal", goalService.getGoalByGoalId(goalId));
+        model.addAttribute("taskList", taskService.getTaskByGoalId(goalId));
+        return "goal-detail";
+    }
+
+    @PostMapping("/write")
+    public String writeGoal(Goal goal) {
+        goalService.createGoal(goal);
+        return "redirect:/taskmanager/goals/goalid/" + goal.getGoalId();
     }
 
     @GetMapping("/update/{goalId}")
@@ -49,7 +56,7 @@ public class GoalController {
     @GetMapping("/delete/{goalId}")
     public String deleteGoalById(@PathVariable int goalId) {
         goalService.deleteGoalById(goalId);
-        return "redirect:/taskmanager/goals/all";
+        return "redirect:/taskmanager/goals/lookup";
     }
 
     @InitBinder

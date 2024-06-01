@@ -18,7 +18,7 @@ public class TaskService {
     }
 
     public Object getTaskByGoalId(int goalId) {
-        return taskRepository.findByGoalId(goalId);
+        return taskRepository.queryByGoalId(goalId);
     }
 
     public void deleteTaskById(int taskId) {
